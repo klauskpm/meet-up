@@ -1,12 +1,7 @@
-var app = {};
+var app = angular.module('MeetUpApp', ['ngMaterial']);
 
-(function(app) {
-	app.models = {};
-
-	app.models.Event = function EventClass () {
-		this.name = 'Evento';
-	};
-})(app);
-
-var evento = new app.models.Event();
-console.log(evento.name);
+app.config(function($mdThemingProvider) {
+	$mdThemingProvider.theme('default')
+		.primaryPalette('teal')
+		.accentPalette('light-green');
+});

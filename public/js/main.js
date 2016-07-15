@@ -1,1 +1,1 @@
-var app={};!function(app){app.models={},app.models.Event=function(){this.name="Evento"}}(app);var evento=new app.models.Event;console.log(evento.name);
+var app=angular.module("MeetUpApp",["ngMaterial"]);app.config(function($mdThemingProvider){$mdThemingProvider.theme("default").primaryPalette("teal").accentPalette("light-green")}),function(app){var injectParams=["$scope"],EventsController=function($scope){$scope.evento="Sera que está ok?"};EventsController.$inject=injectParams,app.controller("EventsController",EventsController)}(app);
