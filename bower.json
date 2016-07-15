@@ -1,0 +1,34 @@
+{
+  "name": "meet-up",
+  "description": "Meet-Up Event Planner as Udacity first project",
+  "main": "index.js",
+  "authors": [
+    "Klaus Kazlauskas <klausmachado@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "meet-up",
+    "udacity",
+    "javascript",
+    "senior",
+    "nanodegree"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#^0.97.6"
+  }
+}
