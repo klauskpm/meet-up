@@ -5,7 +5,10 @@
 
 		var separattor = '||';
 
-		$scope.events = [new app.models.Event({title: 'klaus'})];
+		$scope.events = [
+			new app.models.Event({title: 'Event'}),
+			new app.models.Event({title: 'Another Event'})
+		];
 		$scope.currentEvent = null;
 
 		/**

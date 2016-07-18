@@ -8,7 +8,7 @@
 		name="viewport"
 		content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-    <link
+	<link
 		rel="stylesheet"
 		href="/bower_components/angular-material/angular-material.css">
 
@@ -22,23 +22,27 @@
 		ng-controller="EventsController"
 		ng-cloak="">
 		
-		<md-content>
-			<md-toolbar class="md-primary">
-				<div class="md-toolbar-tools">
-					<h2>
-						<span>Meet Up Event Planner</span>
-					</h2>
-				</div>
-			</md-toolbar>
-		</md-content>
+		<md-toolbar class="md-primary">
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Meet Up Event Planner</span>
+				</h2>
+			</div>
+		</md-toolbar>
 
-		<div>
+		<md-content
+			class="md-padding"
+			layout-xs="column"
+			layout="row">
+			
 			<div
-				ng-repeat="event in events"
+				flex-xs
+				flex-gt-xs="20"
+				layout="column"
 				ng-include
 				src="'/public/template/events/event-single.template.html'">
 			</div>
-		</div>
+		</md-content>
 	</div>
 
 	<script src="/bower_components/angular/angular.js"></script>
