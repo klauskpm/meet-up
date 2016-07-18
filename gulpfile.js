@@ -9,6 +9,7 @@ var mergeMediaQueries = require('gulp-merge-media-queries');
 var cssnano = require('gulp-cssnano');
 var uglify = require('gulp-uglify');
 var autoprefixer = require('gulp-autoprefixer');
+var htmlmin = require('gulp-htmlmin');
 
 /**
  * Sass default compile action for reusage
@@ -65,13 +66,14 @@ function jsCompile (source, destiny, concatFileName) {
 		.pipe(browserSync.stream());
 }
 
-gulp.task('server', ['sass', 'app-js'], function () {
+gulp.task('server', ['sass', 'app-js', 'html'], function () {
 	browserSync.init({
 		server: './'
 	});
 
 	gulp.watch('resources/scss/**/*.scss', ['sass']);
 	gulp.watch('resources/js/**/*.js', ['app-js']);
+	gulp.watch('resources/js/app/**/*.html', ['html']);
 	gulp.watch('*.html', browserSync.reload);
 });
 
@@ -88,6 +90,17 @@ gulp.task('lint', function () {
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(eslint.failOnError());
+});
+
+gulp.task('html', function () {
+	var htmlminOptions = {
+		collapseWhitespace: true
+	};
+
+	return gulp.src('resources/js/app/**/*.html')
+		.pipe(htmlmin(htmlminOptions))
+		.pipe(gulp.dest('public/template'))
+		.pipe(browserSync.stream());
 });
 
 gulp.task('default', ['server']);
