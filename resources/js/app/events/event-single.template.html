@@ -13,8 +13,15 @@
 		layout="row"
 		layout-align="end center">
 
-		<md-button ng-click="getEvent($index)">Get</md-button>
-		<md-button ng-click="saveEventAsDraft(event)">Save as draft</md-button>
-		<md-button ng-click="saveEventAsPublished(event)">Publish</md-button>
+		<md-button
+			class="md-primary md-raised"
+			ng-click="openForm($event, event)">
+			Edit
+		</md-button>
+		<md-button
+			class="md-primary md-raised"
+			ng-click="saveEventAsPublished(event)">
+			Publish
+		</md-button>
 	</md-card-actions>
 </md-card>

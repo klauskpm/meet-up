@@ -1,6 +1,6 @@
 (function(app){
-	var injectParams = ['$scope', '$filter'];
-	var EventsController = function ($scope, $filter) {
+	var injectParams = ['$scope', '$filter', '$mdDialog', '$mdMedia'];
+	var EventsController = function ($scope, $filter, $mdDialog, $mdMedia) {
 		$scope.evento = 'Sera que está ok?';
 
 		var separattor = '||';
@@ -104,6 +104,19 @@
 		 * Alias function for saveEventAsPublished
 		 */
 		$scope.publishEvent = $scope.saveEventAsPublished;
+
+		$scope.openForm = function($event, eventObject) {
+			$scope.currentEvent = eventObject;
+			
+			$mdDialog.show({
+				controller: '',
+				templateUrl: 'public/template/events/event-form.template.html',
+				parent: angular.element(document.body),
+				targetEvent: $event,
+				clickOutsideToClose: true,
+				fullscreen: $mdMedia('sm') || $mdMedia('xs')
+			});
+		};
 	};
 
 	EventsController.$inject = injectParams;
