@@ -96,7 +96,6 @@
 		 * @param {Event} event Event object
 		 */
 		$scope.saveEventAsPublished = function saveEventAsPublishedF (event) {
-			console.log('opes');
 			saveEvent(event, app.models.Event.STATE_PUBLISHED);
 		};
 
@@ -107,14 +106,19 @@
 
 		$scope.openForm = function($event, eventObject) {
 			$scope.currentEvent = eventObject;
-			
+
+			console.log(eventObject);
+
 			$mdDialog.show({
-				controller: '',
+				controller: 'EventFormController',
 				templateUrl: 'public/template/events/event-form.template.html',
 				parent: angular.element(document.body),
 				targetEvent: $event,
 				clickOutsideToClose: true,
-				fullscreen: $mdMedia('sm') || $mdMedia('xs')
+				fullscreen: $mdMedia('sm') || $mdMedia('xs'),
+				locals: {
+					currentEvent: eventObject
+				}
 			});
 		};
 	};

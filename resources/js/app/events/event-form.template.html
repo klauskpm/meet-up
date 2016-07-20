@@ -19,17 +19,84 @@
 		</md-toolbar>
 		<md-dialog-content>
 			<div class="md-dialog-content">
+				<md-input-container
+					class="md-block"
+					flex-gt-sm>
 
+					<label for="title">Title</label>
+					<input
+						type="text"
+						id="title"
+						name="title"
+						placeholder="What will be the event title?"
+						ng-model="currentEvent.title">
+				</md-input-container>
+
+				<md-input-container
+					class="md-block"
+					flex-gt-sm>
+
+					<label for="type">Type</label>
+					<input
+						type="text"
+						id="type"
+						name="type"
+						placeholder="It will be a party?"
+						list="type-list"
+						ng-model="currentEvent.type">
+
+					<datalist id="type-list">
+						<option value="Birthday party">
+						<option value="Party">
+						<option value="Conference talk">
+						<option value="Meeting">
+						<option value="Wedding">
+					</datalist>
+				</md-input-container>
+
+				<md-input-container
+					class="md-block"
+					flex-gt-sm>
+
+					<label for="host">Event host</label>
+					<input
+						type="text"
+						id="host"
+						name="host"
+						placeholder="Who is gonna host it?">
+				</md-input-container>
+
+				<h5>When will it happen?</h5>
+				<label>
+					<md-datepicker
+						ng-model="myDate"
+						md-placeholder="Start date"
+						id="start-date">
+					</md-datepicker>
+					<span>at</span>
+					<input type="time">
+				</label>
+
+				<label>
+					<md-datepicker
+						ng-model="myDate"
+						md-placeholder="End date"
+						id="end-date">
+					</md-datepicker>
+					<span>at</span>
+					<input type="time">
+				</label>
 			</div>
 		</md-dialog-content>
-		<md-dialog-action class="row">
+		<md-dialog-actions layout="row">
 			<md-button>
 				Save as draft
 			</md-button>
 			<span flex></span>
-			<md-button class="md-primary md-raised">
+			<md-button
+				class="md-primary md-raised">
 				Publish
 			</md-button>
-		</md-dialog-action>
+		</md-dialog-actions>
 	</form>
 </md-dialog>
