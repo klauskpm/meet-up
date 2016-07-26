@@ -5,10 +5,7 @@
 
 		var separattor = '||';
 
-		$scope.events = [
-			new app.models.Event({title: 'Event'}),
-			new app.models.Event({title: 'Another Event'})
-		];
+		$scope.events = [];
 		$scope.currentEvent = null;
 
 		/**
@@ -28,12 +25,13 @@
 				var tempEvents = localStorage.getItem('events');
 
 				if (tempEvents) {
-					tempEvents.split(separattor);
-					tempEvents.map(function (event) {
-						return JSON.parse(event);
+					tempEvents = tempEvents.split(separattor);
+					tempEvents = tempEvents.map(function (event) {
+						return new app.models.Event(JSON.parse(event));
 					});
 
 					$scope.events = tempEvents;
+					console.log(tempEvents);
 				}
 			}
 
@@ -117,6 +115,8 @@
 				}
 			});
 		};
+
+		$scope.listEvents();
 	};
 
 	EventsController.$inject = injectParams;
