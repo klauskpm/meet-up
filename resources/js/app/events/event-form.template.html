@@ -96,14 +96,15 @@
 					class="md-block"
 					flex-gt-sm>
 
-					<label for="host">
+					<label for="location">
 						Location
 					</label>
 					<input
-						type="text"
-						id="host"
-						name="host"
-						placeholder="Where it's gonna happen?"/>
+						id="location"
+						name="location"
+						placeholder="Where it's gonna happen?"
+						ng-focus="geolocate()"
+						type="text"/>
 				</md-input-container>
 
 				<md-input-container class="md-block">

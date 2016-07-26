@@ -64,8 +64,6 @@
 			if (!event)
 				return;
 
-			console.log(event.stringify());
-
 			if (savedState)
 				event.setSavedState(savedState);
 
@@ -106,8 +104,6 @@
 
 		$scope.openForm = function($event, eventObject) {
 			$scope.currentEvent = eventObject;
-
-			console.log(eventObject);
 
 			$mdDialog.show({
 				controller: 'EventFormController',
