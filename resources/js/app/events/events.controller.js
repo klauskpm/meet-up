@@ -7,6 +7,7 @@
 
 		$scope.events = [];
 		$scope.currentEvent = null;
+		$scope.EventModel = app.models.Event;
 
 		/**
 		 * Create a new event and sets it as the current
@@ -31,7 +32,6 @@
 					});
 
 					$scope.events = tempEvents;
-					console.log(tempEvents);
 				}
 			}
 
@@ -103,10 +103,12 @@
 		$scope.openForm = function($event, eventObject) {
 			$scope.currentEvent = eventObject;
 
+			console.log(angular.element(document.getElementsByClassName('view-content')[0]));
+
 			$mdDialog.show({
 				controller: 'EventFormController',
 				templateUrl: 'public/template/events/event-form.template.html',
-				parent: angular.element(document.body),
+				parent: angular.element(document.getElementsByClassName('view-content')[0]),
 				targetEvent: $event,
 				clickOutsideToClose: true,
 				fullscreen: $mdMedia('sm') || $mdMedia('xs'),

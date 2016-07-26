@@ -19,6 +19,7 @@
 			Edit
 		</md-button>
 		<md-button
+			ng-if="event.savedState != EventModel.STATE_PUBLISHED"
 			class="md-primary md-raised"
 			ng-click="saveEventAsPublished(event)">
 			Publish
