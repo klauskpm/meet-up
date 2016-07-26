@@ -103,12 +103,10 @@
 		$scope.openForm = function($event, eventObject) {
 			$scope.currentEvent = eventObject;
 
-			console.log(angular.element(document.getElementsByClassName('view-content')[0]));
-
 			$mdDialog.show({
 				controller: 'EventFormController',
 				templateUrl: 'public/template/events/event-form.template.html',
-				parent: angular.element(document.getElementsByClassName('view-content')[0]),
+				parent: angular.element(document.body),
 				targetEvent: $event,
 				clickOutsideToClose: true,
 				fullscreen: $mdMedia('sm') || $mdMedia('xs'),
