@@ -1,84 +1,102 @@
 (function(app){
 	app.models = app.models || {};
 
+	// var LOG_TAG = 'Event.Model';
+
 	/**
-	 * Event class
+	 * Event model
 	 */
-	var Event = function EventClass (event) {
-		// Initializing through method for better maintenance
-		this.init(event);
-	};
+	var Event = {
+		STATE_DRAFT: 1,
+		STATE_PUBLISHED: 2,
 
-	Event.STATE_DRAFT = 1;
-	Event.STATE_PUBLISHED = 2;
+		storageName: 'events',
 
-	Event.prototype = {
+		init: function () {
+			this.listEventsFromStorage();
+		},
+
 		/**
-		 * Initialize the event class
+		 * Create a new event
 		 * 
 		 * Sets the default saved state as draft
 		 */
-		init: function initF (event) {
-			if (!event) {
-				this.setSavedState(Event.STATE_DRAFT);
-			} else {
-				this.id = event.id || new Date().getTime();
-				this.setTitle(event.title);
-				this.setSavedState(event.savedState);
+		create: function createF (event) {
+			var newEvent = {};
+			newEvent.id = event.id || new Date().getTime();
+
+			if (event.title)
+				newEvent.title = event.title;
+
+			if (event)
+				newEvent.savedState = event.savedState || Event.STATE_DRAFT;
+
+			if (Object.keys(newEvent).length > 1) {
+				this.events.push(newEvent);
+				this.updateStorage();
 			}
+
+			return newEvent;
 		},
 
 		/**
-		 * Sets event saved state
-		 * 
-		 * @param {number} state Event saved state
-		 * 
-		 * @return {Event}
+		 * Events list
 		 */
-		setSavedState: function setSavedState (state) {
-			this.state = state;
-			return this;
+		events: [],
+
+		get: function getF (index) {
+			return this.events[index];
+		},
+
+		listEventsFromStorage: function listEventsFromStorageF () {
+			var self = this;
+			var tempEvents = localStorage.getItem(self.storageName);
+
+			if (tempEvents) {
+				tempEvents = JSON.parse(tempEvents).map(function (event) {
+					return self.create(event);
+				});
+				return self.events = tempEvents;
+			}
+				
+
+			return self.events = [];
+		},
+
+		updateStorage: function updateStorageF () {
+			localStorage.setItem(this.storageName, this.stringify());
 		},
 
 		/**
-		 * Gets event saved state
-		 * 
-		 * @return {number} Event saved state
+		 * Save event
 		 */
-		getSavedState: function getSavedStateF () {
-			return this.state;
+		saveEvent: function saveEventF (event) {
+			var tempEvent;
+			this.events.forEach(function(oldEvent, index) {
+				if (event.id == oldEvent.id)
+					this.events[index] = tempEvent = event;
+			});
+
+			if (!tempEvent)
+				this.events.push(event);
+
+			this.updateStorage();
 		},
 
 		/**
-		 * Sets event title
-		 * 
-		 * @param {string} title Event Title
-		 * 
-		 * @return {Event}
+		 * Turn the object into a string
 		 */
-		setTitle: function setTitleF (title) {
-			this.title = title;
-
-			return this;
-		},
-
-		/**
-		 * Gets event title
-		 * 
-		 * @return {string} Event title
-		 */
-		getTitle: function getTitleF () {
-			return this.title;
-		},
-
 		stringify: function stringifyF () {
-			var eventObject = {
-				id: this.id,
-				title: this.getTitle(),
-				savedState: this.getSavedState()
-			};
+			var tempEvents = [];
+			this.events.forEach(function(event) {
+				tempEvents.push({
+					id: event.id,
+					title: event.title,
+					savedState: event.savedState
+				});
+			});
 
-			return JSON.stringify(eventObject);
+			return JSON.stringify(tempEvents);
 		}
 	};
 
