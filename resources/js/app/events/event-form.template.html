@@ -33,7 +33,10 @@
 							type="text"
 							id="title"
 							name="title"
-							ng-model="currentEvent.title"/>
+							ng-model="currentEvent.title"
+							required
+							ng-minlength="5"
+							ng-maxlength="50"/>
 					</md-input-container>
 				</div>
 
