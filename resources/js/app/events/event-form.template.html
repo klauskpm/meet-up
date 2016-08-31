@@ -2,6 +2,7 @@
 	aria-label="Event Form"
 	ng-cloak>
 	<form
+		ng-cloak
 		class="event-form">
 		<md-toolbar>
 			<div class="md-toolbar-tools">
@@ -55,7 +56,8 @@
 							name="location"
 							placeholder="Where it's gonna happen?"
 							ng-focus="geolocate()"
-							type="text"/>
+							type="text"
+							ng-model="currentEvent.location"/>
 					</md-input-container>
 				</div>
 
@@ -66,12 +68,15 @@
 					<div
 						layout="row">
 						<md-datepicker
-							ng-model="myDate"
+							ng-model="currentEvent.startDate"
 							md-placeholder="Start date"
 							name="start-date">
 						</md-datepicker>
 						<span flex></span>
-						<input type="time">
+						<input
+							type="time"
+							ng-model="currentEvent.startTime"
+							class="event-time">
 					</div>
 					
 					<br/>
@@ -88,25 +93,26 @@
 					</div>
 				</div>
 
+				<br/>
+
 				<div
 					layout-gt-sm="row"
 					layout="column">
 
-					<md-chips
-						flex
-						ng-model="currentEvent.guestList"
-						name="guestList"
-						md-max-chips="20"
-						placeholder="Who is invited?"
-						secondary-placeholder="+Another">
-						<md-chip-template>
-							<strong>{{$chip}}</strong>
-						</md-chip-template>
-					</md-chips>
+					<md-input-container
+						class="md-block"
+						flex>
+						<label>
+							How is invited?
+						</label>
+						<textarea
+							ng-model="currentEvent.guestList"
+							rows="5"
+							md-select-on-focus
+							placeholder="yourfriend@mail.com, anotherone@mail.com">
+						</textarea>
+					</md-input-container>
 				</div>
-
-				<br/>
-				<br/>
 
 				<div
 					layout-gt-sm="row"
@@ -160,7 +166,7 @@
 							md-maxlength="150"
 							rows="5"
 							md-select-on-focus
-							placeholder="What the guests should bring, or look for reference to find it easier">
+							placeholder="References of location, event theme and dress code">
 						</textarea>
 					</md-input-container>
 				</div>
