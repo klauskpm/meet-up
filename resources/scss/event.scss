@@ -1,3 +1,23 @@
 body, md-content {
 	background-color: rgb(250,250,250);
 }
+
+.event-card {
+	width: 300px;
+}
+
+.event-form {
+	max-width: 430px;
+}
+
+.event-time {
+	border: none;
+    border-bottom: 1px solid rgb(224,224,224);
+    height: 26px;
+    margin-top: 8px;
+
+	&:focus {
+		outline: none;
+	    border-bottom: 2px solid rgb(0,150,136);
+	}
+}
